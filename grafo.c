@@ -27,6 +27,9 @@ int a, maiorGrau = 0,verticeMaxGrau;
     for(i=0;i<tam;i++){
         for(j=0;j<tam;j++){
             fscanf(arq, "%d", &a);
+           // preencher a matriz para depois verificar o grau, faz parte da questão 2
+            matrizadj[i][j] = a; 
+            //parte da questão2
             grauVertice[i] += a;
         }
         if(grauVertice[i] > maiorGrau){
