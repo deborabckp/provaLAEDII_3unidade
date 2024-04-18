@@ -127,5 +127,33 @@ int a, maiorGrau = 0,verticeMaxGrau;
     for(i = 0; i < n; i++)
     free(matriz[i]);
     //fim da questão 5
+
+    //Questão 07
+
+     // Criando e abrindo o arquivo de saída
+     
+    FILE *arquivo_complementar = fopen("grafo_complementar.txt", "w");
+    if (arquivo_complementar == NULL) {
+        printf("Erro ao criar o arquivo de saída.\n");
+        return 1;
+    }
+
+    // Gerando o grafo complementar
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (i != j && matrizadj[i][j] == 0) {
+                // Se i e j não são o mesmo vértice e não são adjacentes no grafo original,
+                // então eles devem ser adjacentes no grafo complementar
+                fprintf(arquivo_complementar, "%d %d\n", i, j);
+            }
+        }
+    }
+
+    // Fechando o arquivo de saída
+    fclose(arquivo_complementar);
+
+    printf("Grafo complementar gerado com sucesso e salvo em 'grafo_complementar.txt'.\n"); 
+    //fim da questão 07
+
     return 0;
 }
