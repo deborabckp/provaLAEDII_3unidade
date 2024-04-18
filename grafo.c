@@ -49,6 +49,28 @@ void sumidouro(int n, int m, int **matriz){
     }
 }
 
+//questão 5
+void font(int n, int m, int **matriz){
+    int i, aux[n],j;
+    int fonte = 0; 
+    for(j=0;j<m;j++){
+        aux[j] = 0;
+        for(i=0;i<n;i++){
+            aux[j] += matriz[i][j];
+        }
+        if(aux[j] == 0){
+            printf("%d = vertice fonte\n",j);
+            fonte = 1; 
+            break;
+        }
+    }
+    if(!fonte){
+        printf("Não tem vertice fonte.\n");
+    }
+}
+
+
+//fim da função questão 5
 int main(){
 int n,m, i,j,**matriz;
 int *grauVertice;
@@ -97,5 +119,13 @@ int a, maiorGrau = 0,verticeMaxGrau;
         free(matriz[i]);
     free(matriz);
     //fim da questão 4
+    //questão 5
+    matriz = (int **)malloc(n * sizeof(int *));
+    for(i=0;i<n;i++)
+    matriz[i] = (int *)malloc(m * sizeof(int));
+    font(n,m,matriz);
+    for(i = 0; i < n; i++)
+    free(matriz[i]);
+    //fim da questão 5
     return 0;
 }
