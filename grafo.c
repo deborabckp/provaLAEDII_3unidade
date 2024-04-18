@@ -16,16 +16,25 @@ int gVertice( int vertice, int n){
 // fim da funcção da questão 2
 
 // questão 3
-int sumidouro(int vertice, int n){
-    int i, soma = 0;
+
+void sumidouro(int n, int m, int **matriz){
+    int i, aux[n],j;
     for(i=0;i<n;i++){
-        soma += matrizadj[vertice][i];
+        aux[i] = 0;
+        for(j=0;j<m;j++){
+            aux[i] += matriz[i][j];
+        }
+        if(aux[i] == 0){
+            printf("%d = sumidouro\n",i);
+        }else{
+            printf("%d = nao tem sumidouro\n");
+        }
     }
     // para verificar se é igual a zero
-    return soma == 0;
+    
 }
 int main(){
-int n,m, i,j;
+int n,m, i,j,**matriz;
 int *grauVertice;
 int a, maiorGrau = 0,verticeMaxGrau;
     
@@ -62,13 +71,15 @@ int a, maiorGrau = 0,verticeMaxGrau;
     // fim da questao 2
 
     // questão 4
-    for(i=0;i<n;i++){
-        if(sumidouro(i,n)){
-            printf("O vertice %d é um sumidouro.\n", i);
-        }else{
-            printf("não tem sumidouro");
-        }
-    }
+    matriz = (int **)malloc(n * sizeof(int *));
+    for(i = 0; i < n; i++)
+    matriz[i] = (int *)malloc(m * sizeof(int));
+
+
+    sumidouro(n,m,matriz);
+    for(i = 0; i < n; i++)
+        free(matriz[i]);
+    free(matriz);
     //fim da questão 4
     return 0;
 }
