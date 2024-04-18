@@ -14,11 +14,25 @@ int gVertice( int vertice, int n){
     return grauVert;
 }
 // fim da funcção da questão 2
-
-// questão 3
+// questao 3
+void verIsolado(int n){
+    int i, isolado = 0;
+    for(i = 0;i< n; i++){
+        if (gVertice(i,n) == 0){
+            printf("vertice %d esta isolado\n");
+            isolado = 1;
+        }
+    }
+    if(!isolado){
+        printf("nao existe vertice isolados.\n");
+    }
+}
+// fim da funcão da questao 3
+// questão 4
 
 void sumidouro(int n, int m, int **matriz){
     int i, aux[n],j;
+    int temSumidouro = 0; // Variável de sinalização
     for(i=0;i<n;i++){
         aux[i] = 0;
         for(j=0;j<m;j++){
@@ -26,13 +40,15 @@ void sumidouro(int n, int m, int **matriz){
         }
         if(aux[i] == 0){
             printf("%d = sumidouro\n",i);
-        }else{
-            printf("%d = nao tem sumidouro\n",i);
+            temSumidouro = 1; 
+            break;
         }
     }
-    // para verificar se é igual a zero
-    
+    if(!temSumidouro){
+        printf("Não tem sumidouro.\n");
+    }
 }
+
 int main(){
 int n,m, i,j,**matriz;
 int *grauVertice;
@@ -69,13 +85,13 @@ int a, maiorGrau = 0,verticeMaxGrau;
     }
     fclose(arquivo);
     // fim da questao 2
-
+    // questao 3 chamando a função
+    verIsolado(n);
+    // fim da questão 3
     // questão 4
     matriz = (int **)malloc(n * sizeof(int *));
     for(i = 0; i < n; i++)
     matriz[i] = (int *)malloc(m * sizeof(int));
-
-
     sumidouro(n,m,matriz);
     for(i = 0; i < n; i++)
         free(matriz[i]);
