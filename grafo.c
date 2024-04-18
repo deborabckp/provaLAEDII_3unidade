@@ -27,7 +27,7 @@ void sumidouro(int n, int m, int **matriz){
         if(aux[i] == 0){
             printf("%d = sumidouro\n",i);
         }else{
-            printf("%d = nao tem sumidouro\n");
+            printf("%d = nao tem sumidouro\n",i);
         }
     }
     // para verificar se é igual a zero
