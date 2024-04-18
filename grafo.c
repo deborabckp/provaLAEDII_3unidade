@@ -39,10 +39,10 @@ int a, maiorGrau = 0,verticeMaxGrau;
     free(grauVertice);
 
     // Quesão 2
-    int x;
+    
     FILE *arquivo = fopen("dados_grafos_graus.txt","w");
-    for(i=0;i<tam;i++){
-        int grauVert = gVertice(i,x);
+    for(i=0;i<n;i++){
+        int grauVert = gVertice(i,n);
          fprintf(arquivo, "%d %d\n", i, grauVert);
     }
     fclose(arquivo);
