@@ -130,6 +130,7 @@ int a, maiorGrau = 0,verticeMaxGrau;
 
     //Questão 07
 
+
 #define MAX_VERTICES 3771 // Defina o número máximo de vértices conforme necessário
 
 int main();
@@ -149,7 +150,7 @@ int main();
 
     fclose(arquivo_entrada);
 
-    FILE *arquivo_complementar = fopen("grafo_complementar.txt", "w");
+    FILE *arquivo_complementar = fopen("dados_grafo_complementar.txt", "w");
     if (arquivo_complementar == NULL) {
         printf("Erro ao criar o arquivo de saída.\n");
         return 1;
@@ -169,7 +170,7 @@ int main();
     // Fechando o arquivo de saída
     fclose(arquivo_complementar);
 
-    printf("Grafo complementar gerado com sucesso e salvo em 'grafo_complementar.txt'.\n");
+    printf("Grafo complementar gerado com sucesso e salvo em 'dados_grafo_complementar.txt'.\n");
    //Fim da questao 07
     return 0;
 }
