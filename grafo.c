@@ -130,8 +130,25 @@ int a, maiorGrau = 0,verticeMaxGrau;
 
     //Questão 07
 
-     // Criando e abrindo o arquivo de saída
-     
+#define MAX_VERTICES 3771 // Defina o número máximo de vértices conforme necessário
+
+int main();
+    FILE *arquivo_entrada = fopen("dados_matriz.txt", "r");
+    if (arquivo_entrada == NULL) {
+        printf("Erro ao abrir o arquivo de entrada.\n");
+        return 1;
+    }
+
+    // Ler a matriz de adjacência do arquivo
+    fscanf(arquivo_entrada, "%d", &n);
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            fscanf(arquivo_entrada, "%d", &matrizadj[i][j]);
+        }
+    }
+
+    fclose(arquivo_entrada);
+
     FILE *arquivo_complementar = fopen("grafo_complementar.txt", "w");
     if (arquivo_complementar == NULL) {
         printf("Erro ao criar o arquivo de saída.\n");
@@ -140,9 +157,9 @@ int a, maiorGrau = 0,verticeMaxGrau;
 
     // Gerando o grafo complementar
     for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            if (i != j && matrizadj[i][j] == 0) {
-                // Se i e j não são o mesmo vértice e não são adjacentes no grafo original,
+        for (j = i + 1; j < n; j++) { // Evitar processamento duplicado
+            if (matrizadj[i][j] == 0) {
+                // Se i e j não são adjacentes no grafo original,
                 // então eles devem ser adjacentes no grafo complementar
                 fprintf(arquivo_complementar, "%d %d\n", i, j);
             }
@@ -152,8 +169,7 @@ int a, maiorGrau = 0,verticeMaxGrau;
     // Fechando o arquivo de saída
     fclose(arquivo_complementar);
 
-    printf("Grafo complementar gerado com sucesso e salvo em 'grafo_complementar.txt'.\n"); 
-    //fim da questão 07
-
+    printf("Grafo complementar gerado com sucesso e salvo em 'grafo_complementar.txt'.\n");
+   //Fim da questao 07
     return 0;
 }
