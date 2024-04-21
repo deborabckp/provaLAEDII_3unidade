@@ -98,7 +98,7 @@ int a, maiorGrau = 0,verticeMaxGrau;
 
     free(grauVertice);
 
-    // Quesão 2
+    // Questão 2
     
     FILE *arquivo = fopen("dados_grafos_graus.txt","w");
     for(i=0;i<n;i++){
@@ -128,9 +128,55 @@ int a, maiorGrau = 0,verticeMaxGrau;
     free(matriz[i]);
     //fim da questão 5
 
+//questão 6
+void grausEmissaoRecepcao(int n, int **matriz) {
+    int i, j;
+    int *grau_emissao = (int *)calloc(n, sizeof(int));
+    int *grau_recepcao = (int *)calloc(n, sizeof(int));
+
+    // Calcular graus de emissão e recepção
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (matriz[i][j] == 1) {
+                grau_emissao[i]++; // Aresta saindo de i
+                grau_recepcao[j]++; // Aresta chegando a j
+            }
+        }
+    }
+
+    // Gravar graus de emissão em um arquivo
+    FILE *arquivo_emissao = fopen("dados_grafo_emissao.txt", "w");
+    if (arquivo_emissao == NULL) {
+        printf("Erro ao criar o arquivo de emissão.\n");
+        return;
+    }
+
+    for (i = 0; i < n; i++) {
+        fprintf(arquivo_emissao, "%d %d\n", i, grau_emissao[i]);
+    }
+
+    fclose(arquivo_emissao);
+
+    // Gravar graus de recepção em um arquivo
+    FILE *arquivo_recepcao = fopen("dados_grafos_recepcao.txt", "w");
+    if (arquivo_recepcao == NULL) {
+        printf("Erro ao criar o arquivo de recepção.\n");
+        return;
+    }
+
+    for (i = 0; i < n; i++) {
+        fprintf(arquivo_recepcao, "%d %d\n", i, grau_recepcao[i]);
+    }
+
+    fclose(arquivo_recepcao);
+
+    free(grau_emissao);
+    free(grau_recepcao);
+}
+
+//fim da questão 6
+
     //Questão 07
-
-
 #define MAX_VERTICES 3771 // Defina o número máximo de vértices conforme necessário
 
 int main();
@@ -172,5 +218,66 @@ int main();
 
     printf("Grafo complementar gerado com sucesso e salvo em 'dados_grafo_complementar.txt'.\n");
    //Fim da questao 07
+    return 0;
+}
+
+//questão 8 
+
+void lerMatrizAdjacencia(int n, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo %s.\n", nomeArquivo);
+        exit(1);
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            fscanf(arquivo, "%d", &matrizadj[i][j]);
+        }
+    }
+
+    fclose(arquivo);
+}
+
+// Função para inverter a direção das arestas
+void inverterGrafo(int n, const char *arquivoSaida) {
+    FILE *arquivo = fopen(arquivoSaida, "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo %s para gravação.\n", arquivoSaida);
+        exit(1);
+    }
+
+    // Inverter a matriz de adjacência
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (matrizadj[i][j] == 1) {
+                fprintf(arquivo, "%d %d\n", j, i); // Inverte a direção
+            }
+        }
+    }
+
+    fclose(arquivo);
+}
+
+int main() {
+    int n; // Número de vértices
+    
+    // Ler número de vértices do arquivo
+    FILE *arquivoEntrada = fopen("dados_matriz.txt", "r");
+    if (arquivoEntrada == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    fscanf(arquivoEntrada, "%d", &n);
+
+    fclose(arquivoEntrada);
+
+    // Carregar matriz de adjacência
+    lerMatrizAdjacencia(n, "dados_matriz.txt");
+
+    // Inverter a direção das arestas e salvar no novo arquivo
+    inverterGrafo(n, "dados_grafos_invertido.txt");
+
     return 0;
 }
