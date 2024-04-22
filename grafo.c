@@ -40,7 +40,7 @@ void verticeMaiorGrau() {
         }
     }
 
-    printf("O vértice de maior grau é %d com grau %d\n", vertice, max);
+    printf("O vertice de maior grau e %d com grau %d\n", vertice, max);
 }
 // fim da questão 1
 // Questão 2 
@@ -79,11 +79,11 @@ void verIsolado(){
             }
         }
         if(eIsolado) {
-            printf("O vertice %d é isolado.\n", i);
+            printf("O vertice %d e isolado.\n", i);
             return;
         }
     }
-    printf("nao existe vertices isolado nesse grafo\n");
+    printf("Nao existe vertices isolado nesse grafo\n");
 }
 // fim da questão 3
 
@@ -103,7 +103,7 @@ void sumidouro(int n, int m, int matriz[tam][tam]){
             return;
         }
     }
-    printf("Não tem sumidouro.\n");
+    printf("Nao tem sumidouro.\n");
 }
 // fim da Questão 4
 
@@ -122,7 +122,7 @@ void font(int n, int m, int matriz[tam][tam]){
             return;
         }
     }
-    printf("Não tem vertice fonte.\n");
+    printf("Nao tem vertice fonte.\n");
 }
 //fim da função questão 5
 
@@ -186,7 +186,7 @@ void grafoComplemetar(int linha, int coluna, int matriz[tam][tam]){
 void inverterGrafo(int n, const char *arquivoSaida) {
     FILE *arquivo = fopen(arquivoSaida, "w");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo %s para gravação.\n");
+        printf("Erro ao abrir o arquivo %s para gravaçao.\n");
         exit(1);
     }
 
