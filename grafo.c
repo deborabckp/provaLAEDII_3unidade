@@ -354,12 +354,12 @@ int main(){
     // fim questão 8
 
     // questão 10
- verticesMultiplosDeCinco(linha);
- // fim da questão 10
+    verticesMultiplosDeCinco(linha);
+    // fim da questão 10
 
- // questão 11
- encontrarMaiorClique(linha);
- // fim da questão 11
+    // questão 11
+    encontrarMaiorClique(linha);
+    // fim da questão 11
 
     return 0;
 }
