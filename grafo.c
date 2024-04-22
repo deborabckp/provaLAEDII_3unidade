@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #define tam 3771
+bool visitado[tam];  // Para marcar vértices visitados
 int matriz[tam][tam];
 // para ler o arquivo original
 // Questão 1
@@ -316,8 +317,37 @@ void encontrarMaiorClique(int n) {
 
 //fim da questão 11
 
+// questão 12
+// Função para inicializar os vértices como não visitados
+void inicializarVisitados(int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        visitado[i] = false;
+    }
+}
+
+// Função para a Busca em Profundidade 
+void dfs(int vertice, int tamanho) {
+    visitado[vertice] = true;  // Marcar o vértice como visitado
+    for (int i = 0; i < tamanho; i++) {
+        if (matriz[vertice][i] == 1 && !visitado[i]) {  // Se for adjacente e não visitado
+            dfs(i, tamanho);
+        }
+    }
+}
+
+// Função para verificar se o primeiro e o último vértice estão conectados
+bool primeiroUltimoConectados(int tamanho) {
+    inicializarVisitados(tamanho);  // Inicializar os vértices como não visitados
+    dfs(0, tamanho);  // Iniciar a busca do primeiro vértice (índice 0)
+
+    // Se o último vértice estiver visitado, estão conectados
+    return visitado[tamanho - 1];
+}
+// fim da questão 12
+
 int main(){
     int linha,coluna;
+    int tamanho;
     // questão 1
     lerGrafoInicial(&linha,&coluna);
     totalLinhaColuna();
@@ -360,6 +390,17 @@ int main(){
     // questão 11
     encontrarMaiorClique(linha);
     // fim da questão 11
+
+    // questão 12
+    lerGrafoInicial(&tamanho, &tamanho);
+
+    // Verificar se o primeiro e o último vértice estão conectados
+    if (primeiroUltimoConectados(tamanho)) {
+        printf("O primeiro e o ultimo vertice estao conectados.\n");
+    } else {
+        printf("O primeiro e o ultimo vertice NAO estao conectados.\n");
+    }
+    // fim da questão 12
 
     return 0;
 }
